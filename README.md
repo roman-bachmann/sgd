@@ -18,3 +18,9 @@ This command will run everthing inside the `sgd.Main`.
 ```bash
 sbt test
 ```
+
+### Download RCV1 dataset
+This might take a while
+```bash
+cd resources; bash download-data.sh
+```

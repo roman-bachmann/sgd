@@ -11,3 +11,7 @@ target
 *.ipr
 *.iws
 .history
+
+*.bz2
+*.csv
+rcv1rcv2aminigoutte/
