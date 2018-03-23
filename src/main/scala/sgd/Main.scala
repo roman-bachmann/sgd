@@ -1,21 +1,16 @@
 package sgd
 
-import sgd.Constants
+import sgd.Settings
 import sgd.IngestData
 
 object Main {
 
   def main(args: Array[String]) {
 
-    println(Constants.discoveryPrefix())
+    val dataPaths = Settings.discoveryDataPaths().take(2) // I get java.lang.OutOfMemoryError: GC overhead limit exceeded if I run the entire dataset
 
-    val dataPath = "/Users/lia/work/study/epfl/systemsForDataScience/sgd/resources/rcv1rcv2aminigoutte/EN/Index_EN-EN" // args(0)
+    val (labels, features) = IngestData(dataPaths)
 
-    val (labels, features) = IngestData(dataPath)
-
-    println(labels.length)
-
-
-    println("Hello guys!")
+    println("Dataset has " + labels.length + " rows. Have fun!")
   }
 }

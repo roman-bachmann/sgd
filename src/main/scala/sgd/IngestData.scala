@@ -10,8 +10,8 @@ object IngestData {
   }
 
 
-  def treatData(buff: scala.io.BufferedSource): (Vector[String], Vector[Map[Int, Double]]) = {
-    val rawData = buff.getLines.toVector.map(x => x.split(" "))
+  def treatData(buff: scala.io.BufferedSource): (Array[String], Array[Map[Int, Double]]) = {
+    val rawData = buff.getLines.toArray.map(x => x.split(" "))
     val labels = rawData.map(_.head) // not sure if they are the labels
     val features = rawData.map(_.tail).map(getFeatures)
 
@@ -19,10 +19,13 @@ object IngestData {
   }
 
 
-  def apply(path: String): (Vector[String], Vector[Map[Int, Double]]) = {
-    val buff = scala.io.Source.fromFile(path)
+  def apply(paths: Array[String]): (Array[String], Array[Map[Int, Double]]) = {
+    val buffs = paths.map(x => scala.io.Source.fromFile(x))
+    val datas = buffs.map(treatData)
 
-    return treatData(buff)
+    val labels = datas.map(x => x._1).flatten
+    val features = datas.map(x =>  x._2).flatten
+
+    return (labels, features)
   }
-
 }
