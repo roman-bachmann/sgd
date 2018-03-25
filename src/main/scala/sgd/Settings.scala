@@ -8,17 +8,16 @@ object Settings {
     val projectDirectory = new java.io.File(".").getCanonicalPath
     val dataDirectory = new File(projectDirectory, "resources/rcv1rcv2aminigoutte").getPath.toString
 
-    val subDirectories = (new File(dataDirectory))
+    val subDirectories = new File(dataDirectory)
       .listFiles
       .filter(_.isDirectory)
       .map(_.getPath.toString)
 
     val filesToRead = subDirectories
-      .map(x => (new File(x)).listFiles)
-      .map(x => x.filter(_.isFile).map(_.getPath.toString))
-      .flatten
+      .map(x => new File(x).listFiles)
+      .flatMap(x => x.filter(_.isFile).map(_.getPath.toString))
 
-    return filesToRead
+    filesToRead
   }
 
 
