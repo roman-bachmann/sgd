@@ -15,7 +15,7 @@ object Main {
     println("Dataset has " + labels.length + " rows. Have fun!")
 
     // Map labels to {-1, 1}
-    val targets = features.map(x => if (x == "A") 1 else -1)
+    val targets = labels.map(x => if (x == "ECAT") 1 else -1)
 
     // initialize new SVM object
     val svm = new SVM(features, targets, 1, 10)
